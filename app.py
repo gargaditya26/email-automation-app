@@ -196,9 +196,6 @@ def reports():
 def about():
     return render_template("about.html")
 
-@app.route('/')
-def home():
-    return "Server is running"
 
 
 if __name__ == '__main__':
