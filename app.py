@@ -173,5 +173,27 @@ def features():
 def pricing():
     return render_template('pricing.html')
 
+@app.route("/reports")
+def reports():
+    if 'user' not in session:
+        return redirect('/login')
+
+    # ✅ Dummy data (temporary)
+    total_sent = 1248
+    campaigns = 12
+    failed = 23
+
+    return render_template(
+        "reports.html",
+        total_sent=total_sent,
+        campaigns=campaigns,
+        failed=failed
+    )
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -3,35 +3,57 @@
 
 <div class="dashboard">
 
+    <!-- LEFT PANEL -->
     <div class="main">
-        <h2>Welcome, {{user}} 👋</h2>
-        <p>Manage campaigns and send personalized bulk emails easily.</p>
-        <a class="btn" href="/send">🚀 Start New Campaign</a>
+
+        <div class="welcome-card">
+            <h2>Welcome back, {{user}} 👋</h2>
+            <p>Here’s what’s happening with your email campaigns today.</p>
+
+            <div class="quick-actions">
+                <a class="btn" href="/send">🚀 New Campaign</a>
+                <a class="btn btn-outline" href="/reports">📊 View Reports</a>
+            </div>
+        </div>
+
+        <!-- 📜 Recent Activity -->
+        <div class="activity-card">
+            <h3>📜 Recent Activity</h3>
+            <ul class="activity-list">
+                <li>✅ Campaign <b>Festival Offer</b> sent successfully</li>
+                <li>📬 {{ total_sent }} emails delivered</li>
+                <li>❌ {{ failed }} emails failed</li>
+                <li>👥 Contacts list updated</li>
+                <li>🕒 Last campaign 2 hours ago</li>
+            </ul>
+        </div>
+
     </div>
 
+    <!-- RIGHT PANEL -->
     <div class="right-panel">
 
         <!-- 📊 Stats Cards -->
         <div class="stats">
             <div class="stat-box">
-                <h4>📧 Emails Sent</h4>
-                <p class="stat-number">{{ total_sent }}</p>
+                <div class="stat-number counter" data-target="{{ total_sent }}">0</div>
+                <div class="stat-label">Emails Sent</div>
             </div>
 
             <div class="stat-box">
-                <h4>📁 Campaigns</h4>
-                <p class="stat-number">{{ campaigns }}</p>
+                <div class="stat-number counter" data-target="{{ campaigns }}">0</div>
+                <div class="stat-label">Campaigns</div>
             </div>
 
             <div class="stat-box">
-                <h4>❌ Failed</h4>
-                <p class="stat-number">{{ failed }}</p>
+                <div class="stat-number counter" data-target="{{ failed }}">0</div>
+                <div class="stat-label">Failed</div>
             </div>
         </div>
 
         <!-- 📈 Usage Progress -->
         <div class="progress-section">
-            <h4>📈 Email Sending Usage</h4>
+            <h4>📈 Monthly Email Usage</h4>
 
             <div class="progress-bar">
                 <div class="progress-fill 
@@ -39,23 +61,35 @@
                     {% elif used <= 250 %} alert
                     {% else %} danger
                     {% endif %}
-                " style="width: {{ (used/500)*100 }}%;">
-                </div>
+                " style="width: {{ (used/500)*100 }}%;"></div>
             </div>
 
             <p class="progress-text">
-                <strong>{{used}}</strong> / 500 emails used
+                <strong>{{used}}</strong> of <strong>500</strong> emails used
             </p>
-
-            <div class="zones">
-                <span class="zone safe-text">🟢 Safe (0–150)</span>
-                <span class="zone alert-text">🟡 Alert (151–250)</span>
-                <span class="zone danger-text">🔴 Danger (251–500)</span>
-            </div>
         </div>
 
     </div>
 </div>
 
-{% endblock %}
+<!-- 🔢 Counter Animation Script -->
+<script>
+const counters = document.querySelectorAll('.counter');
+counters.forEach(counter => {
+    const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const inc = target / 60;
 
+        if(count < target){
+            counter.innerText = Math.ceil(count + inc);
+            setTimeout(updateCount, 20);
+        } else {
+            counter.innerText = target;
+        }
+    };
+    updateCount();
+});
+</script>
+
+{% endblock %}

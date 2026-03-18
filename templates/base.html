@@ -5,9 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
     <div class="nav">
-
         <!-- Left Logo -->
         <div class="nav-left">
             <h2>
@@ -23,7 +21,7 @@
             <a href="/dashboard">Dashboard</a>
             <a href="/send">Send Emails</a>
             <a href="#">Services</a>
-            <a href="#">About Us</a>
+            <a href="/about">About</a>
         </div>
 
         <!-- Right Logout -->
@@ -31,7 +29,6 @@
             <a href="/logout" class="logout-btn">Logout</a>
         </div>
         {% endif %}
-
     </div>
 
     <div class="container">
