@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Send Bulk Emails</h3>
+<form method="POST" enctype="multipart/form-data">
+
+<label>Your Gmail</label>
+<input name="email" required>
+
+<label>App Password</label>
+<input name="password" type="password" required>
+
+<label>Subject</label>
+<input name="subject" required>
+
+<label>Message</label>
+<textarea name="message" rows="6" placeholder="Use {Name} and {Company}" required></textarea>
+
+<label>Upload Excel</label>
+<input type="file" name="excel" accept=".xlsx" required>
+
+<label>Attachment (optional)</label>
+<input type="file" name="attachment">
+
+<button type="submit">Send Emails</button>
+</form>
+{% endblock %}

@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Automation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#2563eb;
+      --primary-dark:#1e40af;
+      --bg:#f8fbff;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(180deg,#eef5ff 0%,#ffffff 40%);
+      color:var(--text);
+    }
+
+    .container{width:1200px;max-width:92%;margin:auto}
+
+    header{
+      position:sticky;top:0;background:rgba(255,255,255,0.9);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid #e5e7eb;
+      z-index:100;
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+
+    .logo{font-weight:700;font-size:22px;color:var(--primary)}
+
+    .nav-links{display:flex;gap:28px;align-items:center}
+    .nav-links a{color:#374151;text-decoration:none;font-weight:500}
+
+    .btn{
+      padding:12px 22px;border-radius:12px;border:none;
+      font-weight:600;cursor:pointer;text-decoration:none;display:inline-block
+    }
+
+    .btn-outline{border:2px solid var(--primary);color:var(--primary);background:#fff}
+    .btn-primary{background:var(--primary);color:white;box-shadow:0 8px 18px rgba(37,99,235,0.3)}
+    .btn-primary:hover{background:var(--primary-dark)}
+
+    /* HERO */
+    .hero{padding:90px 0 70px}
+    .hero-wrap{display:flex;align-items:center;gap:60px}
+    .hero h1{font-size:52px;line-height:1.15;margin-bottom:22px}
+    .hero h1 span{color:var(--primary)}
+    .hero p{color:var(--muted);font-size:18px;margin-bottom:30px}
+    .hero-btns{display:flex;gap:16px;margin-bottom:30px}
+
+    .mock{
+      flex:1;background:var(--card);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:22px
+    }
+
+    .mock-top{height:14px;background:#e5e7eb;border-radius:10px;margin-bottom:18px}
+    .mock-chart{height:160px;background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-radius:12px;margin-bottom:18px}
+    .mock-row{display:flex;gap:12px;margin-bottom:12px}
+    .mock-box{flex:1;height:46px;background:#eef2ff;border-radius:10px}
+
+    /* SECTION */
+    section{padding:80px 0}
+    .section-title{text-align:center;font-size:34px;margin-bottom:50px}
+    .section-title span{color:var(--primary)}
+
+    /* FEATURES */
+    .features{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+    .card{
+      background:var(--card);padding:26px;border-radius:var(--radius);
+      box-shadow:var(--shadow);transition:0.3s
+    }
+    .card:hover{transform:translateY(-6px)}
+    .icon{
+      width:48px;height:48px;border-radius:12px;
+      background:#dbeafe;margin-bottom:16px
+    }
+    .card h3{margin-bottom:10px}
+    .card p{color:var(--muted);font-size:14px}
+
+    /* HOW */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+    .step{background:var(--card);padding:28px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .step-num{
+      width:42px;height:42px;border-radius:50%;
+      background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;
+      font-weight:700;margin-bottom:14px
+    }
+
+    /* DASHBOARD */
+    .dash-wrap{display:flex;align-items:center;gap:60px}
+    .dash-img{flex:1}
+    .dash-img .mock{height:260px}
+    .dash-text{flex:1}
+    .dash-text h2{font-size:36px;margin-bottom:18px}
+    .dash-text p{color:var(--muted);margin-bottom:24px}
+
+    /* PRICING */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+    .price-card{
+      background:var(--card);padding:36px;border-radius:var(--radius);
+      box-shadow:var(--shadow);text-align:center
+    }
+    .price{font-size:42px;color:var(--primary);margin:18px 0}
+    .price-card ul{list-style:none;margin:22px 0;text-align:left}
+    .price-card li{margin-bottom:10px;color:var(--muted)}
+    .price-card.popular{border:3px solid var(--primary);transform:scale(1.05)}
+
+    /* TESTIMONIALS */
+    .testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+    .testimonial{background:var(--card);padding:26px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .user{display:flex;align-items:center;gap:14px;margin-top:18px}
+    .avatar{width:46px;height:46px;border-radius:50%;background:#dbeafe}
+
+    /* CTA */
+    .cta{
+      background:linear-gradient(135deg,#2563eb,#1e3a8a);
+      color:white;text-align:center;padding:70px 20px;border-radius:32px
+    }
+    .cta h2{font-size:36px;margin-bottom:20px}
+
+    footer{padding:40px 0;color:var(--muted);text-align:center}
+
+    /* RESPONSIVE */
+    @media(max-width:992px){
+      .hero-wrap,.dash-wrap{flex-direction:column}
+      .features{grid-template-columns:repeat(2,1fr)}
+      .steps{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .testimonials{grid-template-columns:1fr}
+      .hero h1{font-size:38px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">✉️ EmailAutomation</div>
+    <div class="nav-links">
+      <a href="#">Features</a>
+      <a href="#">Pricing</a>
+      <a href="/login" class="btn" >Login</a>
+      <a href="/login" class="btn btn-primary">Get Started</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-wrap">
+    <div style="flex:1">
+      <h1>Automate Your Emails.<br><span>Save Time. Grow Faster.</span></h1>
+      <p>Create smart email sequences, schedule campaigns and track performance — all in one powerful platform.</p>
+      <div class="hero-btns">
+        <a class="btn btn-primary" href="/login">Get Started Free</a>
+        <a class="btn btn-outline" href="/login">Login</a>
+      </div>
+    </div>
+    <div class="mock">
+      <div class="mock-top"></div>
+      <div class="mock-chart"></div>
+      <div class="mock-row">
+        <div class="mock-box"></div>
+        <div class="mock-box"></div>
+      </div>
+      <div class="mock-row">
+        <div class="mock-box"></div>
+        <div class="mock-box"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="section-title">Powerful Email Automation <span>Features</span></h2>
+    <div class="features">
+      <div class="card"><div class="icon"></div><h3>Drag & Drop Builder</h3><p>Create beautiful emails easily with visual editor.</p></div>
+      <div class="card"><div class="icon"></div><h3>Smart Scheduling</h3><p>Send emails at perfect time automatically.</p></div>
+      <div class="card"><div class="icon"></div><h3>Contact Management</h3><p>Organize and segment audience efficiently.</p></div>
+      <div class="card"><div class="icon"></div><h3>Advanced Analytics</h3><p>Track opens, clicks and campaign performance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#f1f5ff">
+  <div class="container">
+    <h2 class="section-title">How It <span>Works</span></h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Create Sequence</h3><p>Design your automated email workflow.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Add Contacts</h3><p>Import and manage your contact lists.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Automate & Track</h3><p>Launch campaigns and monitor results.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container dash-wrap">
+    <div class="dash-img">
+      <div class="mock"></div>
+    </div>
+    <div class="dash-text">
+      <h2>Your Dashboard, Your Control</h2>
+      <p>Manage all campaigns from one powerful dashboard with real-time analytics and performance insights.</p>
+      <a href="/dashboard" class="btn btn-primary">Explore Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<section style="background:#f8fbff">
+  <div class="container">
+    <h2 class="section-title">Simple & Transparent <span>Pricing</span></h2>
+    <div class="pricing">
+      <div class="price-card">
+        <h3>Free</h3>
+        <div class="price">₹0</div>
+        <ul>
+          <li>Basic Features</li>
+          <li>Limited Emails</li>
+          <li>Email Support</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Choose Plan</a>
+      </div>
+      <div class="price-card popular">
+        <h3>Pro</h3>
+        <div class="price">₹999</div>
+        <ul>
+          <li>Advanced Automation</li>
+          <li>Unlimited Emails</li>
+          <li>Priority Support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Choose Plan</a>
+      </div>
+      <div class="price-card">
+        <h3>Business</h3>
+        <div class="price">₹2499</div>
+        <ul>
+          <li>Full Suite Tools</li>
+          <li>Team Access</li>
+          <li>Dedicated Manager</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Choose Plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="section-title">What Our Users Say</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>“This tool saved our marketing team hundreds of hours. Super easy and powerful.”</p>
+        <div class="user"><div class="avatar"></div><div><strong>Akash S.</strong><br><span style="color:var(--muted);font-size:13px">Startup Founder</span></div></div>
+      </div>
+      <div class="testimonial">
+        <p>“Automation and analytics are incredible. Our conversions increased massively.”</p>
+        <div class="user"><div class="avatar"></div><div><strong>Priya M.</strong><br><span style="color:var(--muted);font-size:13px">Marketing Lead</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cta">
+      <h2>Start Automating Your Emails Today</h2>
+      <a href="/login" class="btn btn-primary" style="background:white;color:#1e3a8a">Create Free Account</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 EmailAutomation. All rights reserved.
+</footer>
+
+</body>
+</html>

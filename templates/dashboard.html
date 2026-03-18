@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="main">
+        <h2>Welcome, {{user}} 👋</h2>
+        <p>Manage campaigns and send personalized bulk emails easily.</p>
+        <a class="btn" href="/send">🚀 Start New Campaign</a>
+    </div>
+
+    <div class="right-panel">
+
+        <!-- 📊 Stats Cards -->
+        <div class="stats">
+            <div class="stat-box">
+                <h4>📧 Emails Sent</h4>
+                <p class="stat-number">{{ total_sent }}</p>
+            </div>
+
+            <div class="stat-box">
+                <h4>📁 Campaigns</h4>
+                <p class="stat-number">{{ campaigns }}</p>
+            </div>
+
+            <div class="stat-box">
+                <h4>❌ Failed</h4>
+                <p class="stat-number">{{ failed }}</p>
+            </div>
+        </div>
+
+        <!-- 📈 Usage Progress -->
+        <div class="progress-section">
+            <h4>📈 Email Sending Usage</h4>
+
+            <div class="progress-bar">
+                <div class="progress-fill 
+                    {% if used <= 150 %} safe
+                    {% elif used <= 250 %} alert
+                    {% else %} danger
+                    {% endif %}
+                " style="width: {{ (used/500)*100 }}%;">
+                </div>
+            </div>
+
+            <p class="progress-text">
+                <strong>{{used}}</strong> / 500 emails used
+            </p>
+
+            <div class="zones">
+                <span class="zone safe-text">🟢 Safe (0–150)</span>
+                <span class="zone alert-text">🟡 Alert (151–250)</span>
+                <span class="zone danger-text">🔴 Danger (251–500)</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+

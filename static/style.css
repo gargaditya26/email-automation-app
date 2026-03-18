@@ -1,0 +1,183 @@
+body {
+    font-family: Arial;
+    background: #f4f6f8;
+    margin: 0;
+}
+
+/* ✅ Updated Navbar */
+.nav{
+    background:#2d89ef;
+    padding:15px 30px;
+    color:white;
+    display:flex;
+    align-items:center;
+}
+
+/* Left (Logo) */
+.nav-left{
+    display:flex;
+    align-items:center;
+}
+
+.nav-left h2{
+    margin:0;
+}
+
+/* Center Menu */
+.nav-center{
+    display:flex;
+    gap:30px;
+    margin-left:60px;
+    font-weight:bold;
+}
+
+.nav-center a{
+    color:white;
+    text-decoration:none;
+}
+
+.nav-center a:hover{
+    opacity:0.85;
+}
+
+/* Right Logout */
+.nav-right{
+    margin-left:auto;
+}
+
+.logout-btn{
+    background:#ef4444;
+    padding:8px 16px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.logout-btn:hover{
+    background:#dc2626;
+}
+
+.logout-btn{
+    background:#ef4444;
+    padding:8px 14px;
+    border-radius:6px;
+}
+
+.container {
+    padding: 30px;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+button {
+    background: #2d89ef;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.alert {
+    background: #dff0d8;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #2d89ef;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.dashboard{
+    display:flex;
+    justify-content:space-between;
+    gap:40px;
+}
+
+.main{
+    width:50%;
+}
+
+.right-panel{
+    width:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+}
+
+/* ✅ Cards in one line */
+.stats{
+    display:flex;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+/* ✅ Smaller cards */
+.stat-box{
+    background:white;
+    padding:15px;
+    width:130px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    text-align:center;
+}
+
+.stat-number{
+    font-size:22px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+/* ✅ Progress Section */
+.progress-section{
+    width:100%;
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.progress-bar{
+    width:100%;
+    height:18px;
+    background:#eee;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px 0;
+}
+
+.progress-fill{
+    height:100%;
+    border-radius:20px;
+    transition:0.4s;
+}
+
+.safe{ background:#22c55e; }
+.alert{ background:#eab308; }
+.danger{ background:#ef4444; }
+
+.zones{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    margin-top:8px;
+}

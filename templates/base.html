@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Automation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="nav">
+
+        <!-- Left Logo -->
+        <div class="nav-left">
+            <h2>
+    	        <a href="/" style="text-decoration:none; color:inherit;">
+                    📧 Email Automation App
+                </a>
+	    </h2>
+        </div>
+
+        {% if session.get('user') %}
+        <!-- Center Menu -->
+        <div class="nav-center">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/send">Send Emails</a>
+            <a href="#">Services</a>
+            <a href="#">About Us</a>
+        </div>
+
+        <!-- Right Logout -->
+        <div class="nav-right">
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for msg in messages %}
+              <div class="alert">{{ msg }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
