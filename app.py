@@ -12,8 +12,6 @@ app = Flask(__name__)
 app.secret_key = "secretkey"
 
 
-port = int(os.environ.get("PORT", 10000))
-app.run(host="0.0.0.0", port=port)
 
 UPLOAD_FOLDER = "uploads"
 USER_DATA = "user_data"
@@ -198,7 +196,9 @@ def reports():
 def about():
     return render_template("about.html")
 
-
+@app.route('/')
+def home():
+    return "Server is running"
 
 
 if __name__ == '__main__':
