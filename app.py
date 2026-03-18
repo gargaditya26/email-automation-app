@@ -11,6 +11,10 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 app = Flask(__name__)
 app.secret_key = "secretkey"
 
+
+port = int(os.environ.get("PORT", 10000))
+app.run(host="0.0.0.0", port=port)
+
 UPLOAD_FOLDER = "uploads"
 USER_DATA = "user_data"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -193,6 +197,8 @@ def reports():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+
 
 
 if __name__ == '__main__':
