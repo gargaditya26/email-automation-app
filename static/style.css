@@ -181,3 +181,82 @@ button {
     font-size:12px;
     margin-top:8px;
 }
+
+/* Center Auth Pages */
+.auth-container{
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-box{
+    width: 380px;
+    max-width: 92%;
+    background: white;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.auth-box h3{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth-box input{
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.auth-box button{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.auth-box button:hover{
+    background: #1e40af;
+}
+
+.auth-box p{
+    text-align: center;
+    margin-top: 12px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px){
+
+    .nav{
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .nav-center{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .container{
+        width: 94%;
+    }
+
+    table{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    h1{font-size:22px}
+    h2{font-size:20px}
+    h3{font-size:18px}
+}

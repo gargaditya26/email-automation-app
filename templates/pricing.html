@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.pricing-wrap{
+  text-align:center;
+  padding:60px 20px;
+}
+.pricing-title{
+  font-size:38px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+.pricing-sub{
+  color:#6b7280;
+  margin-bottom:50px;
+}
+.pricing-grid{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+.price-card{
+  background:#fff;
+  border-radius:18px;
+  padding:40px;
+  width:300px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+.price-card:hover{
+  transform:translateY(-8px);
+}
+.price{
+  font-size:42px;
+  color:#2563eb;
+  margin:20px 0;
+  font-weight:700;
+}
+.plan{
+  font-size:22px;
+  font-weight:600;
+}
+.price-card ul{
+  list-style:none;
+  padding:0;
+  margin:25px 0;
+}
+.price-card li{
+  margin:12px 0;
+  color:#6b7280;
+}
+.btn-buy{
+  background:#2563eb;
+  color:#fff;
+  padding:12px 24px;
+  border-radius:10px;
+  text-decoration:none;
+  display:inline-block;
+  margin-top:15px;
+}
+.popular{
+  border:3px solid #2563eb;
+  transform:scale(1.05);
+}
+</style>
+
+<div class="pricing-wrap">
+  <div class="pricing-title">Our Plans & Pricing</div>
+  <div class="pricing-sub">Simple pricing for everyone</div>
+
+  <div class="pricing-grid">
+
+    <div class="price-card">
+      <div class="plan">Free</div>
+      <div class="price">₹0</div>
+      <ul>
+        <li>Basic Features</li>
+        <li>Limited Emails</li>
+        <li>Email Support</li>
+      </ul>
+      <a href="/signup" class="btn-buy">Get Started</a>
+    </div>
+
+    <div class="price-card popular">
+      <div class="plan">Pro</div>
+      <div class="price">₹999</div>
+      <ul>
+        <li>Advanced Automation</li>
+        <li>Unlimited Emails</li>
+        <li>Priority Support</li>
+      </ul>
+      <a href="/signup" class="btn-buy">Buy Now</a>
+    </div>
+
+    <div class="price-card">
+      <div class="plan">Business</div>
+      <div class="price">₹2499</div>
+      <ul>
+        <li>Full Suite Tools</li>
+        <li>Team Access</li>
+        <li>Dedicated Manager</li>
+      </ul>
+      <a href="/signup" class="btn-buy">Buy Now</a>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
