@@ -1,16 +1,94 @@
 {% extends 'base.html' %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='features.css') }}">
+<div class="features-wrap">
 
-<div class="auth-container">
-  <div class="auth-box">
-    <h3>Create Account</h3>
-    <form method="POST">
-        <input name="username" placeholder="Username" required>
-        <input name="password" type="password" placeholder="Password" required>
-        <button>Create Account</button>
-    </form>
-    <p>Already have account? <a href="/login">Login</a></p>
+  <h1 class="fz-title">✨ Email Automation Features</h1>
+  <p class="fz-sub">Everything you need to run smart email campaigns 🚀</p>
+
+  <div class="fz-grid">
+
+    <div class="fz-card">
+      <div class="icon">🎨</div>
+      <h3>Drag & Drop Builder</h3>
+      <p>Create stunning emails with an easy visual editor.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">⏰</div>
+      <h3>Smart Scheduling</h3>
+      <p>Automatically send emails at the perfect time.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">📂</div>
+      <h3>Contact Management</h3>
+      <p>Organize and segment your audience effortlessly.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">📊</div>
+      <h3>Advanced Analytics</h3>
+      <p>Track performance with opens, clicks & insights.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">🤖</div>
+      <h3>AI Email Writer</h3>
+      <p>Generate high-converting emails instantly using smart AI tools.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">🧠</div>
+      <h3>Smart Personalization</h3>
+      <p>AI customizes content based on user behavior and interests.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">📈</div>
+      <h3>Predictive Analytics</h3>
+      <p>Forecast campaign performance using intelligent data models.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">🎯</div>
+      <h3>Audience Targeting AI</h3>
+      <p>Automatically target the right audience segments for better ROI.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">📝</div>
+      <h3>Smart Templates Library</h3>
+      <p>Access pre-built modern templates for every business need.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">⚡</div>
+      <h3>Real-Time Campaign Monitor</h3>
+      <p>Track live email opens, clicks and engagement instantly.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">🔮</div>
+      <h3>Upcoming: Auto Follow-ups</h3>
+      <p>System will automatically send follow-ups to non-responders.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">🔐</div>
+      <h3>Enterprise Security</h3>
+      <p>Advanced encryption and secure infrastructure for data safety.</p>
+    </div>
+
+    <div class="fz-card">
+      <div class="icon">🌍</div>
+      <h3>Multi-Language AI Support</h3>
+      <span class="badge">Upcoming</span>
+      <p>Create campaigns in multiple languages with AI translation.</p>
+    </div>
+
   </div>
+
 </div>
 
 {% endblock %}

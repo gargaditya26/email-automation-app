@@ -167,7 +167,7 @@ def send():
 def home():
     return render_template("index.html")
 
-@app.route('/features')
+@app.route('/features', methods=['GET','POST'])
 def features():
     return render_template('features.html')
 

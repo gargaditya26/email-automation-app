@@ -51,42 +51,7 @@ body {
 }
 .logout-btn:hover{background:#dc2626}
 
-/* ===== FORMS ===== */
-form {
-    background: white;
-    padding: 20px;
-    max-width: 500px;
-    border-radius: 8px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-}
 
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius:6px;
-    border:1px solid #ddd;
-}
-
-button {
-    background: #2d89ef;
-    color: white;
-    padding: 10px;
-    border: none;
-    width: 100%;
-    border-radius: 5px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.2s;
-}
-button:hover{background:#1c6fd6}
-
-.alert {
-    background: #dff0d8;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-}
 
 /* ===== BUTTONS ===== */
 .btn {
@@ -446,5 +411,93 @@ button:hover{background:#1c6fd6}
     to{
         opacity:1;
         transform:translateY(0);
+    }
+}
+
+
+
+/* ===== FOOTER ===== */
+
+.site-footer{
+    background:#223e81;
+    color:#cbd5e1;
+    padding:40px 20px 20px;
+    margin-top:60px;
+    font-family: Arial, sans-serif;
+}
+
+.footer-content{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+/* Left Section */
+.footer-left h3{
+    color:white;
+    margin-bottom:10px;
+}
+.footer-left p{
+    font-size:14px;
+    margin:6px 0;
+}
+
+/* Center Links */
+.footer-center h4{
+    color:white;
+    margin-bottom:12px;
+}
+.footer-center a{
+    display:block;
+    color:#cbd5e1;
+    text-decoration:none;
+    margin-bottom:8px;
+    font-size:14px;
+    transition:0.2s;
+}
+.footer-center a:hover{
+    color:white;
+    padding-left:4px;
+}
+
+/* Right Social */
+.footer-right h4{
+    color:white;
+    margin-bottom:12px;
+}
+.social-links a{
+    display:block;
+    color:#cbd5e1;
+    text-decoration:none;
+    margin-bottom:10px;
+    font-size:14px;
+    transition:0.2s;
+}
+.social-links a i{
+    margin-right:6px;
+}
+.social-links a:hover{
+    color:white;
+}
+
+/* Bottom Line */
+.footer-bottom{
+    text-align:center;
+    margin-top:30px;
+    padding-top:15px;
+    border-top:1px solid #1e293b;
+    font-size:13px;
+    color:#94a3b8;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .footer-content{
+        flex-direction:column;
+        text-align:center;
+        gap:30px;
     }
 }
