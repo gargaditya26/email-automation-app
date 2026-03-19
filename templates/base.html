@@ -4,37 +4,166 @@
     <title>Email Automation</title>   
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Navbar CSS -->
+    <style>
+        /* NAVBAR */
+        .nav{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:16px 5%;
+            background:rgba(255,255,255,0.75);
+            backdrop-filter:blur(12px);
+            position:sticky;
+            top:0;
+            z-index:1000;
+            border-bottom:1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-left h2{
+            font-size:22px;
+            font-weight:700;
+            color:#2563eb;
+        }
+
+        .nav-center{
+            display:flex;
+            gap:26px;
+        }
+
+        .nav-center a{
+            text-decoration:none;
+            color:#334155;
+            font-weight:500;
+            transition:0.2s;
+        }
+
+        .nav-center a:hover{
+            color:#2563eb;
+        }
+
+        .nav-right{
+            display:flex;
+            gap:14px;
+            align-items:center;
+        }
+
+        .btn{
+            padding:8px 16px;
+            border-radius:8px;
+            text-decoration:none;
+            font-weight:600;
+            font-size:14px;
+        }
+
+        .btn-primary{
+            background:linear-gradient(135deg,#3b82f6,#1e40af);
+            color:white;
+        }
+
+        .btn-outline{
+            border:1.5px solid #3b82f6;
+            color:#3b82f6;
+        }
+
+        .btn-outline:hover{
+            background:#3b82f6;
+            color:white;
+        }
+
+        .logout-btn{
+            background:#ef4444;
+            color:white;
+            padding:8px 16px;
+            border-radius:8px;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .logout-btn:hover{
+            background:#dc2626;
+        }
+
+        /* FOOTER FIX */
+        .site-footer{
+            margin-top:60px;
+            background:#0f172a;
+            color:#cbd5e1;
+            padding:50px 5%;
+        }
+
+        .footer-content{
+            display:flex;
+            justify-content:space-between;
+            flex-wrap:wrap;
+            gap:40px;
+        }
+
+        .footer-content h3,
+        .footer-content h4{
+            color:white;
+            margin-bottom:14px;
+        }
+
+        .footer-center a,
+        .social-links a{
+            display:block;
+            text-decoration:none;
+            color:#cbd5e1;
+            margin-bottom:8px;
+            font-size:14px;
+        }
+
+        .footer-center a:hover,
+        .social-links a:hover{
+            color:white;
+        }
+
+        .social-links i{margin-right:8px}
+    </style>
 </head>
 
 
 <body>
+
+    <!-- ✅ NAVBAR -->
     <div class="nav">
-        <!-- Left Logo -->
+
+        <!-- Logo -->
         <div class="nav-left">
             <h2>
     	        <a href="/" style="text-decoration:none; color:inherit;">
-                    📧 Email Automation App
+                    📧 Email Automation
                 </a>
-	    </h2>
+	        </h2>
         </div>
 
-        {% if session.get('user') %}
-        <!-- Center Menu -->
-        <div class="nav-center">
-            <a href="/dashboard">Dashboard</a>
-            <a href="/send">Campaigns</a>
-            <a href="/pricing">Pricing</a>
+        <!-- Center Menu (Always Visible) -->
+        <div class="nav-center">       
+
+            {% if session.get('user') %}
+                <a href="/dashboard">Dashboard</a>
+                <a href="/send">Campaigns</a>
+            {% endif %}
             <a href="/features">Features</a>
+            <a href="/pricing">Pricing</a>
             <a href="/about">About</a>
         </div>
 
-        <!-- Right Logout -->
+        <!-- Right Buttons -->
         <div class="nav-right">
-            <a href="/logout" class="logout-btn">Logout</a>
+            {% if session.get('user') %}
+                <a href="/logout" class="logout-btn">Logout</a>
+            {% else %}
+                <a href="/login" class="btn btn-outline">Login</a>
+                <a href="/register" class="btn btn-primary">Sign Up</a>
+            {% endif %}
         </div>
-        {% endif %}
+
     </div>
 
+    <!-- PAGE CONTENT -->
     <div class="container">
         {% with messages = get_flashed_messages() %}
           {% if messages %}
@@ -43,41 +172,41 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
+
         {% block content %}{% endblock %}
-    
+    </div>
+
+
+    <!-- FOOTER -->
     <footer class="site-footer">
         <div class="footer-content">
 
             <div class="footer-left">
-            <h3>📧 MailPilot</h3>
-            <p>Smart AI Email Automation Platform</p>
-            <p>© 2026 MailPilot. All rights reserved.</p>
+                <h3>📧 MailPilot</h3>
+                <p>Smart AI Email Automation Platform</p>
+                <p>© 2026 MailPilot. All rights reserved.</p>
             </div>
 
             <div class="footer-center">
-            <h4>Quick Links</h4>
-            <a href="/">Home</a>
-            <a href="/features">Features</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/about">About</a>
+                <h4>Quick Links</h4>
+                <a href="/">Home</a>
+                <a href="/features">Features</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/about">About</a>
             </div>
 
             <div class="footer-right">
-            <h4>Connect With Us</h4>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="#"><i class="fas fa-envelope"></i> Email</a>
-            </div>
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                    <a href="#"><i class="fab fa-linkedin"></i>LinkedIn</a>
+                    <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                    <a href="#"><i class="fas fa-envelope"></i>Email</a>
+                </div>
             </div>
 
         </div>
-        </footer>
-
-    
-    
-    </div>
+    </footer>
 
 </body>
 </html>
