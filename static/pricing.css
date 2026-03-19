@@ -1,0 +1,174 @@
+.pricing-section{
+  padding:80px 20px;
+  background:linear-gradient(180deg,#eef5ff,#ffffff);
+  font-family:'Poppins',sans-serif;
+  color:#0f172a;
+}
+
+/* Header */
+.pricing-header{
+  text-align:center;
+  margin-bottom:50px;
+}
+.pricing-header h1{
+  font-size:40px;
+  font-weight:700;
+  color:#0f172a;
+}
+.pricing-header p{
+  color:#64748b;
+  margin-top:10px;
+  font-size:18px;
+}
+
+/* Toggle */
+.pricing-toggle{
+  display:flex;
+  justify-content:center;
+  margin-bottom:50px;
+}
+.toggle-pill{
+  background:#e0ecff;
+  padding:6px;
+  border-radius:40px;
+  display:inline-flex;
+  gap:6px;
+}
+/* Footer */
+.pricing-footer{
+  text-align:center;
+  margin-top:60px;
+  color:#1e1f22;
+  font-size:14px;
+}
+
+
+.toggle-pill button{
+  background:transparent;
+  border:none;
+  color:#1e3a8a;
+  padding:10px 18px;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+.toggle-pill button.active{
+  background:#2563eb;
+  color:#fff;
+  box-shadow:0 4px 14px rgba(37,99,235,0.4);
+}
+
+/* Cards */
+.pricing-container{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+.pricing-card{
+  background:#ffffff;
+  border-radius:20px;
+  padding:40px 30px;
+  width:320px;
+  text-align:center;
+  border:1px solid #e2e8f0;
+  box-shadow:0 10px 30px rgba(37,99,235,0.08);
+  transition:0.3s;
+  position:relative;
+}
+.pricing-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 20px 40px rgba(37,99,235,0.18);
+}
+.pricing-card.popular{
+  border:2px solid #2563eb;
+}
+
+/* Badge */
+.badge{
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#2563eb;
+  color:#fff;
+  padding:6px 14px;
+  font-size:13px;
+  border-radius:20px;
+  font-weight:600;
+}
+
+/* Text */
+.pricing-card h3{
+  font-size:24px;
+  margin-bottom:15px;
+}
+.price{
+  font-size:44px;
+  font-weight:700;
+  color:#2563eb;
+  margin:10px 0;
+}
+.price span{
+  font-size:16px;
+  color:#64748b;
+}
+.plan-desc{
+  color:#64748b;
+  margin:10px 0 20px;
+}
+.pricing-card ul{
+  list-style:none;
+  padding:0;
+  margin:25px 0;
+}
+.pricing-card li{
+  margin:12px 0;
+  color:#475569;
+  font-size:15px;
+}
+
+/* Buttons */
+.btn{
+  display:inline-block;
+  padding:12px 26px;
+  border-radius:10px;
+  text-decoration:none;
+  background:#e0ecff;
+  color:#1e3a8a;
+  font-weight:600;
+  transition:0.3s;
+}
+.btn:hover{ background:#c7dbff; }
+.btn.primary{
+  background:#2563eb;
+  color:#fff;
+}
+.btn.primary:hover{ background:#1d4ed8; }
+
+/* FAQ */
+.faq-section{
+  max-width:900px;
+  margin:100px auto 0;
+}
+.faq-title{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:40px;
+  color:#0f172a;
+}
+.faq-item{
+  background:#ffffff;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  margin-bottom:15px;
+  padding:18px 22px;
+  transition:0.3s;
+}
+.faq-item:hover{
+  border-color:#2563eb;
+  box-shadow:0 8px 24px rgba(37,99,235,0.15);
+}
+.faq-q{ font-weight:600; margin-bottom:8px; }
+.faq-a{ color:#64748b; font-size:14px; }

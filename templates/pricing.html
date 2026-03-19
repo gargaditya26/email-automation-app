@@ -1,111 +1,115 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<style>
-.pricing-wrap{
-  text-align:center;
-  padding:60px 20px;
-}
-.pricing-title{
-  font-size:38px;
-  font-weight:700;
-  margin-bottom:10px;
-}
-.pricing-sub{
-  color:#6b7280;
-  margin-bottom:50px;
-}
-.pricing-grid{
-  display:flex;
-  justify-content:center;
-  gap:30px;
-  flex-wrap:wrap;
-}
-.price-card{
-  background:#fff;
-  border-radius:18px;
-  padding:40px;
-  width:300px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
-  transition:0.3s;
-}
-.price-card:hover{
-  transform:translateY(-8px);
-}
-.price{
-  font-size:42px;
-  color:#2563eb;
-  margin:20px 0;
-  font-weight:700;
-}
-.plan{
-  font-size:22px;
-  font-weight:600;
-}
-.price-card ul{
-  list-style:none;
-  padding:0;
-  margin:25px 0;
-}
-.price-card li{
-  margin:12px 0;
-  color:#6b7280;
-}
-.btn-buy{
-  background:#2563eb;
-  color:#fff;
-  padding:12px 24px;
-  border-radius:10px;
-  text-decoration:none;
-  display:inline-block;
-  margin-top:15px;
-}
-.popular{
-  border:3px solid #2563eb;
-  transform:scale(1.05);
-}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='pricing.css') }}">
 
-<div class="pricing-wrap">
-  <div class="pricing-title">Our Plans & Pricing</div>
-  <div class="pricing-sub">Simple pricing for everyone</div>
+<section class="pricing-section">
 
-  <div class="pricing-grid">
+  <div class="pricing-header">
+    <h1>Simple, Transparent Pricing</h1>
+    <p>No hidden fees. No drama. Just powerful features.</p>
+  </div>
 
-    <div class="price-card">
-      <div class="plan">Free</div>
-      <div class="price">₹0</div>
+  <!-- Toggle (FIXED POSITION) -->
+  <div class="pricing-toggle">
+    <div class="toggle-pill">
+      <button class="active" onclick="changePlan('monthly',event)">Monthly</button>
+      <button onclick="changePlan('quarterly',event)">Quarterly (15% OFF)</button>
+      <button onclick="changePlan('yearly',event)">Yearly (30% OFF)</button>
+    </div>
+  </div>
+
+  <div class="pricing-container">
+
+    <!-- Free Plan -->
+    <div class="pricing-card">
+      <h3>Free</h3>
+      <div class="price" data-monthly="0" data-quarterly="0" data-yearly="0">₹0<span>/mo</span></div>
+      <p class="plan-desc">Perfect to get started</p>
       <ul>
-        <li>Basic Features</li>
-        <li>Limited Emails</li>
-        <li>Email Support</li>
+        <li>✔ Basic Features</li>
+        <li>✔ 100 Emails / month</li>
+        <li>✔ Community Support</li>
+        <li>✔ Basic Analytics</li>
       </ul>
-      <a href="/signup" class="btn-buy">Get Started</a>
+      <a href="/signup" class="btn">Start Free</a>
     </div>
 
-    <div class="price-card popular">
-      <div class="plan">Pro</div>
-      <div class="price">₹999</div>
+    <!-- Popular Plan -->
+    <div class="pricing-card popular">
+      <div class="badge">🔥 Most Popular</div>
+      <h3>Starter Pro</h3>
+      <div class="price" data-monthly="99" data-quarterly="84" data-yearly="69">₹99<span>/mo</span></div>
+      <p class="plan-desc">For creators & startups</p>
       <ul>
-        <li>Advanced Automation</li>
-        <li>Unlimited Emails</li>
-        <li>Priority Support</li>
+        <li>✔ Unlimited Emails</li>
+        <li>✔ Smart Automation</li>
+        <li>✔ Advanced Analytics</li>
+        <li>✔ Priority Support</li>
+        <li>✔ Custom Templates</li>
       </ul>
-      <a href="/signup" class="btn-buy">Buy Now</a>
+      <a href="/signup" class="btn primary">Upgrade Now</a>
     </div>
 
-    <div class="price-card">
-      <div class="plan">Business</div>
-      <div class="price">₹2499</div>
+    <!-- Business Plan -->
+    <div class="pricing-card">
+      <h3>Business Pro</h3>
+      <div class="price" data-monthly="399" data-quarterly="339" data-yearly="279">₹399<span>/mo</span></div>
+      <p class="plan-desc">Best for scaling teams</p>
       <ul>
-        <li>Full Suite Tools</li>
-        <li>Team Access</li>
-        <li>Dedicated Manager</li>
+        <li>✔ Everything in Starter</li>
+        <li>✔ Team Collaboration</li>
+        <li>✔ API Access</li>
+        <li>✔ Dedicated Manager</li>
+        <li>✔ Premium Integrations</li>
       </ul>
-      <a href="/signup" class="btn-buy">Buy Now</a>
+      <a href="/signup" class="btn">Go Business</a>
     </div>
 
   </div>
-</div>
+
+  <div class="pricing-footer">
+    <p>⚡ 7-day refund policy &nbsp; | &nbsp; 💳 Secure Payments &nbsp; | &nbsp; ☁ Cancel Anytime</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="faq-title">Frequently Asked Questions</div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I cancel anytime?</div>
+      <div class="faq-a">Yes, you can cancel your subscription anytime. No hidden charges.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is there refund policy?</div>
+      <div class="faq-a">We offer 7-day refund policy if you're not satisfied.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Do plans include future updates?</div>
+      <div class="faq-a">Yes! All premium plans include lifetime feature updates.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is payment secure?</div>
+      <div class="faq-a">We use encrypted & secure payment gateways for transactions.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Auto Price Change Script -->
+<script>
+function changePlan(plan,e){
+  document.querySelectorAll('.toggle-pill button').forEach(btn=>btn.classList.remove('active'));
+  e.target.classList.add('active');
+
+  document.querySelectorAll('.price').forEach(price=>{
+    let amount = price.getAttribute('data-'+plan);
+    price.innerHTML = "₹"+amount+"<span>/mo</span>";
+  });
+}
+</script>
 
 {% endblock %}

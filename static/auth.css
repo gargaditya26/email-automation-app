@@ -1,0 +1,127 @@
+/* ===== AUTH PAGES GenZ AI STYLE ===== */
+
+.auth-container{
+    min-height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+    background:linear-gradient(180deg,#eef5ff,#ffffff);
+    position:relative;
+    overflow:hidden;
+}
+
+/* soft gradient blobs */
+.auth-container::before,
+.auth-container::after{
+    content:'';
+    position:absolute;
+    width:420px;
+    height:420px;
+    background:radial-gradient(circle,#bfdbfe,transparent 70%);
+    z-index:0;
+}
+.auth-container::before{ top:-120px; left:-120px; }
+.auth-container::after{ bottom:-120px; right:-120px; }
+
+/* Glass Card */
+.auth-box{
+    width:400px;
+    max-width:95%;
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(18px);
+    padding:45px 40px;
+    border-radius:22px;
+    box-shadow:0 20px 50px rgba(37,99,235,0.15);
+    position:relative;
+    z-index:1;
+    border:1px solid rgba(255,255,255,0.6);
+    animation:fadeUp .6s ease;
+}
+
+/* Heading */
+.auth-box h3{
+    text-align:center;
+    margin-bottom:28px;
+    font-size:26px;
+    color:#0f172a;
+}
+
+/* Inputs */
+.auth-box input{
+    width:100%;
+    padding:14px 14px;
+    margin-bottom:16px;
+    border-radius:12px;
+    border:1px solid #e2e8f0;
+    background:#ffffff;
+    font-size:14px;
+    transition:.3s;
+    outline:none;
+}
+
+.auth-box input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,0.15);
+}
+
+/* Button */
+.auth-box button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(90deg,#2563eb,#3b82f6);
+    color:white;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 10px 20px rgba(37,99,235,0.25);
+}
+
+.auth-box button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 18px 35px rgba(37,99,235,0.35);
+}
+
+/* Links */
+.auth-box p{
+    text-align:center;
+    margin-top:18px;
+    font-size:14px;
+    color:#64748b;
+}
+
+.auth-box a{
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:600;
+}
+.auth-box a:hover{ text-decoration:underline; }
+
+/* Divider */
+.auth-divider{
+    text-align:center;
+    margin:18px 0;
+    font-size:13px;
+    color:#94a3b8;
+    position:relative;
+}
+.auth-divider::before,
+.auth-divider::after{
+    content:'';
+    position:absolute;
+    top:50%;
+    width:35%;
+    height:1px;
+    background:#e2e8f0;
+}
+.auth-divider::before{ left:0 }
+.auth-divider::after{ right:0 }
+
+/* Animation */
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(30px)}
+    to{opacity:1; transform:translateY(0)}
+}

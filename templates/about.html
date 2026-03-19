@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+
 <section class="about-hero">
     <h1 class="fade-in">About <span>BulkMail Pro</span> 🚀</h1>
     <p class="fade-in delay-1">
@@ -42,7 +44,31 @@
 
 </section>
 
-<section class="about-cta fade-in delay-7">
+<!-- NEW: Stats -->
+<section class="about-stats">
+    <div class="stat-box fade-in delay-4">
+        <h2>50K+</h2>
+        <p>Active Users</p>
+    </div>
+    <div class="stat-box fade-in delay-5">
+        <h2>120M+</h2>
+        <p>Emails Sent</p>
+    </div>
+    <div class="stat-box fade-in delay-6">
+        <h2>98%</h2>
+        <p>Delivery Rate</p>
+    </div>
+    <div class="stat-box fade-in delay-7">
+        <h2>24/7</h2>
+        <p>Support Available</p>
+    </div>
+</section>
+
+<div class="trusted fade-in delay-7">
+    TRUSTED BY STARTUPS • MARKETERS • BUSINESSES WORLDWIDE
+</div>
+
+<section class="about-cta fade-in delay-8">
     <h2>🤝 Let’s Grow Together</h2>
     <p>Join thousands of users scaling their outreach with smarter campaigns.</p>
     <a href="/dashboard" class="cta-btn">Go to Dashboard</a>
