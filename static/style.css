@@ -66,89 +66,6 @@ body {
 }
 .btn:hover{background:#1c6fd6}
 
-/* ===== DASHBOARD LAYOUT ===== */
-.dashboard{
-    display:flex;
-    justify-content:space-between;
-    gap:40px;
-    margin-top:20px;
-}
-
-.main{width:50%}
-
-.right-panel{
-    width:50%;
-    display:flex;
-    flex-direction:column;
-    gap:25px;
-    align-items:stretch;
-}
-
-/* ===== STATS CARDS ===== */
-.stats{
-    display:flex;
-    gap:15px;
-    margin-bottom:25px;
-}
-
-.stat-box{
-    background:white;
-    padding:18px;
-    width:130px;
-    border-radius:12px;
-    box-shadow:0 4px 14px rgba(0,0,0,0.08);
-    text-align:center;
-    transition:0.2s;
-}
-.stat-box:hover{transform:translateY(-3px)}
-
-.stat-number{
-    font-size:22px;
-    font-weight:bold;
-    margin-top:8px;
-    color:#111827;
-}
-
-/* ===== PROGRESS SECTION ===== */
-.progress-section{
-    width:100%;
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 4px 14px rgba(0,0,0,0.08);
-}
-
-.progress-bar{
-    width:100%;
-    height:18px;
-    background:#eee;
-    border-radius:20px;
-    overflow:hidden;
-    margin:12px 0;
-}
-
-.progress-fill{
-    height:100%;
-    border-radius:20px;
-    transition:0.4s ease;
-}
-
-.safe{ background:#22c55e; }
-.alert{ background:#eab308; }
-.danger{ background:#ef4444; }
-
-.progress-text{
-    font-size:14px;
-    margin-bottom:8px;
-}
-
-.zones{
-    display:flex;
-    justify-content:space-between;
-    font-size:12px;
-    margin-top:8px;
-    color:#6b7280;
-}
 
 /* ===== AUTH PAGES ===== */
 .auth-container{
@@ -399,13 +316,13 @@ body {
     animation:fadeUp 0.8s forwards;
 }
 
-.delay-1{animation-delay:0.2s}
-.delay-2{animation-delay:0.4s}
-.delay-3{animation-delay:0.6s}
-.delay-4{animation-delay:0.8s}
-.delay-5{animation-delay:1s}
-.delay-6{animation-delay:1.2s}
-.delay-7{animation-delay:1.4s}
+.delay-1{animation-delay:0.1s}
+.delay-2{animation-delay:0.2s}
+.delay-3{animation-delay:0.3s}
+.delay-4{animation-delay:0.4s}
+.delay-5{animation-delay:0.5s}
+.delay-6{animation-delay:0.5s}
+.delay-7{animation-delay:0.5s}
 
 @keyframes fadeUp{
     to{

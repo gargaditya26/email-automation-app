@@ -1,60 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 
 <div class="dashboard">
 
-    <!-- LEFT PANEL -->
     <div class="main">
 
-        <div class="welcome-card">
+        <div class="card welcome-card">
             <h2>Welcome back, {{user}} 👋</h2>
-            <p>Here’s what’s happening with your email campaigns today.</p>
-
+            <p>Here’s what’s happening with your campaigns today.</p>
             <div class="quick-actions">
                 <a class="btn" href="/send">🚀 New Campaign</a>
-                <a class="btn btn-outline" href="/reports">📊 View Reports</a>
+                <a class="btn btn-outline" href="/reports">📊 Reports</a>
             </div>
         </div>
 
-        <!-- 📜 Recent Activity -->
-        <div class="activity-card">
+        <div class="card ai-card">
+            <h3>🧠 AI Insights</h3>
+            <ul>
+                <li>📈 Best open rate at <b>7 PM</b></li>
+                <li>🔥 Emoji subject lines perform 23% better</li>
+                <li>🚀 Your engagement increased this week</li>
+            </ul>
+        </div>
+
+        <div class="card">
             <h3>📜 Recent Activity</h3>
             <ul class="activity-list">
-                <li>✅ Campaign <b>Festival Offer</b> sent successfully</li>
+                <li>✅ Campaign <b>Festival Offer</b> sent</li>
                 <li>📬 {{ total_sent }} emails delivered</li>
-                <li>❌ {{ failed }} emails failed</li>
-                <li>👥 Contacts list updated</li>
-                <li>🕒 Last campaign 2 hours ago</li>
+                <li>❌ {{ failed }} failed</li>
+                <li>👥 Contacts updated</li>
             </ul>
+        </div>
+
+        <div class="card">
+            <h3>📬 Recent Campaigns</h3>
+            <table class="campaign-table">
+                <tr><th>Name</th><th>Date</th><th>Status</th></tr>
+                <tr><td>Festive Sale</td><td>12 Mar</td><td>✅ Sent</td></tr>
+                <tr><td>Product Launch</td><td>10 Mar</td><td>⏳ Scheduled</td></tr>
+                <tr><td>Weekly News</td><td>8 Mar</td><td>🟢 Active</td></tr>
+            </table>
         </div>
 
     </div>
 
-    <!-- RIGHT PANEL -->
     <div class="right-panel">
 
-        <!-- 📊 Stats Cards -->
         <div class="stats">
-            <div class="stat-box">
+            <div class="card stat-box">
                 <div class="stat-number counter" data-target="{{ total_sent }}">0</div>
                 <div class="stat-label">Emails Sent</div>
             </div>
-
-            <div class="stat-box">
+            <div class="card stat-box">
                 <div class="stat-number counter" data-target="{{ campaigns }}">0</div>
                 <div class="stat-label">Campaigns</div>
             </div>
-
-            <div class="stat-box">
+            <div class="card stat-box">
                 <div class="stat-number counter" data-target="{{ failed }}">0</div>
                 <div class="stat-label">Failed</div>
             </div>
         </div>
 
-        <!-- 📈 Usage Progress -->
-        <div class="progress-section">
-            <h4>📈 Monthly Email Usage</h4>
-
+        <div class="card progress-section">
+            <h4>📈 Monthly Usage</h4>
             <div class="progress-bar">
                 <div class="progress-fill 
                     {% if used <= 150 %} safe
@@ -63,16 +73,34 @@
                     {% endif %}
                 " style="width: {{ (used/500)*100 }}%;"></div>
             </div>
+            <p><strong>{{used}}</strong> of 500 emails used</p>
+        </div>
 
-            <p class="progress-text">
-                <strong>{{used}}</strong> of <strong>500</strong> emails used
-            </p>
+        <div class="card contacts-card">
+            <h3>👥 Contacts Overview</h3>
+            <p>Total Contacts: <b>1,240</b></p>
+            <p>Active Subscribers: <b>1,180</b></p>
+            <p>Unsubscribed: <b>60</b></p>
+        </div>
+
+        <div class="card engagement-card">
+            <h3>🎯 Engagement Score</h3>
+            <div class="score-circle">82%</div>
+            <p>Above industry average 🚀</p>
+        </div>
+
+        <div class="card notify-card">
+            <h3>🔔 Notifications</h3>
+            <ul>
+                <li>📢 Campaign completed</li>
+                <li>⚠ Some emails bounced</li>
+                <li>🎉 25 new subscribers joined</li>
+            </ul>
         </div>
 
     </div>
 </div>
 
-<!-- 🔢 Counter Animation Script -->
 <script>
 const counters = document.querySelectorAll('.counter');
 counters.forEach(counter => {
@@ -80,13 +108,10 @@ counters.forEach(counter => {
         const target = +counter.getAttribute('data-target');
         const count = +counter.innerText;
         const inc = target / 60;
-
         if(count < target){
             counter.innerText = Math.ceil(count + inc);
             setTimeout(updateCount, 20);
-        } else {
-            counter.innerText = target;
-        }
+        } else { counter.innerText = target; }
     };
     updateCount();
 });
