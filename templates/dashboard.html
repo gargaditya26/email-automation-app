@@ -6,48 +6,17 @@
 
     <div class="main">
 
+        <!-- Welcome -->
         <div class="card welcome-card">
             <h2>Welcome back, {{user}} 👋</h2>
-            <p>Here’s what’s happening with your campaigns today.</p>
+            <p>Here’s your campaign performance overview.</p>
             <div class="quick-actions">
-                <a class="btn" href="/send">🚀 New Campaign</a>
-                <a class="btn btn-outline" href="/reports">📊 Reports</a>
+                <a class="btn" href="/send">🚀 Create Campaign</a>
+                <a class="btn btn-outline" href="/reports">📊 View Reports</a>
             </div>
         </div>
 
-        <div class="card ai-card">
-            <h3>🧠 AI Insights</h3>
-            <ul>
-                <li>📈 Best open rate at <b>7 PM</b></li>
-                <li>🔥 Emoji subject lines perform 23% better</li>
-                <li>🚀 Your engagement increased this week</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>📜 Recent Activity</h3>
-            <ul class="activity-list">
-                <li>✅ Campaign <b>Festival Offer</b> sent</li>
-                <li>📬 {{ total_sent }} emails delivered</li>
-                <li>❌ {{ failed }} failed</li>
-                <li>👥 Contacts updated</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>📬 Recent Campaigns</h3>
-            <table class="campaign-table">
-                <tr><th>Name</th><th>Date</th><th>Status</th></tr>
-                <tr><td>Festive Sale</td><td>12 Mar</td><td>✅ Sent</td></tr>
-                <tr><td>Product Launch</td><td>10 Mar</td><td>⏳ Scheduled</td></tr>
-                <tr><td>Weekly News</td><td>8 Mar</td><td>🟢 Active</td></tr>
-            </table>
-        </div>
-
-    </div>
-
-    <div class="right-panel">
-
+        <!-- Stats Row -->
         <div class="stats">
             <div class="card stat-box">
                 <div class="stat-number counter" data-target="{{ total_sent }}">0</div>
@@ -59,10 +28,68 @@
             </div>
             <div class="card stat-box">
                 <div class="stat-number counter" data-target="{{ failed }}">0</div>
-                <div class="stat-label">Failed</div>
+                <div class="stat-label">Failed Deliveries</div>
             </div>
         </div>
 
+        <!-- AI + Activity Grid -->
+        <div class="dual-grid">
+            <div class="card ai-card">
+                <h3>🧠 AI Insights</h3>
+                <ul>
+                    <li>📈 Best open rate at <b>7 PM</b></li>
+                    <li>🔥 Emoji subject lines perform 23% better</li>
+                    <li>🚀 Engagement increased this week</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>📜 Recent Activity</h3>
+                <ul class="activity-list">
+                    <li>✅ Campaign <b>Festival Offer</b> sent</li>
+                    <li>📬 {{ total_sent }} emails delivered</li>
+                    <li>❌ {{ failed }} emails failed</li>
+                    <li>👥 Contact list updated</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Campaign Table -->
+        <div class="card">
+            <div class="section-head">
+                <h3>📬 Recent Campaigns</h3>
+                <a href="/campaigns" class="link">View All</a>
+            </div>
+            <table class="campaign-table">
+                <tr>
+                    <th>Campaign</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>Festive Sale</td>
+                    <td>12 Mar</td>
+                    <td class="status sent">✅ Sent</td>
+                </tr>
+                <tr>
+                    <td>Product Launch</td>
+                    <td>10 Mar</td>
+                    <td class="status scheduled">⏳ Scheduled</td>
+                </tr>
+                <tr>
+                    <td>Weekly Newsletter</td>
+                    <td>8 Mar</td>
+                    <td class="status active">🟢 Active</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+
+        <!-- Usage -->
         <div class="card progress-section">
             <h4>📈 Monthly Usage</h4>
             <div class="progress-bar">
@@ -76,23 +103,28 @@
             <p><strong>{{used}}</strong> of 500 emails used</p>
         </div>
 
+        <!-- Contacts -->
         <div class="card contacts-card">
             <h3>👥 Contacts Overview</h3>
-            <p>Total Contacts: <b>1,240</b></p>
-            <p>Active Subscribers: <b>1,180</b></p>
-            <p>Unsubscribed: <b>60</b></p>
+            <div class="mini-stats">
+                <div><span>All Contacts</span><b>1,240</b></div>
+                <div><span>Active</span><b>1,180</b></div>
+                <div><span>Unsubscribed</span><b>60</b></div>
+            </div>
         </div>
 
+        <!-- Engagement -->
         <div class="card engagement-card">
             <h3>🎯 Engagement Score</h3>
             <div class="score-circle">82%</div>
             <p>Above industry average 🚀</p>
         </div>
 
+        <!-- Notifications -->
         <div class="card notify-card">
             <h3>🔔 Notifications</h3>
             <ul>
-                <li>📢 Campaign completed</li>
+                <li>📢 Campaign completed successfully</li>
                 <li>⚠ Some emails bounced</li>
                 <li>🎉 25 new subscribers joined</li>
             </ul>
@@ -107,10 +139,10 @@ counters.forEach(counter => {
     const updateCount = () => {
         const target = +counter.getAttribute('data-target');
         const count = +counter.innerText;
-        const inc = target / 60;
+        const inc = Math.ceil(target / 80);
         if(count < target){
-            counter.innerText = Math.ceil(count + inc);
-            setTimeout(updateCount, 20);
+            counter.innerText = count + inc;
+            setTimeout(updateCount, 15);
         } else { counter.innerText = target; }
     };
     updateCount();
