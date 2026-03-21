@@ -21,6 +21,20 @@
             border-bottom:1px solid rgba(0,0,0,0.05);
         }
 
+        /* LOGO IMAGE */
+        .logo-wrap{
+            margin:0;
+            display:flex;
+            align-items:center;
+        }
+
+        .logo-wrap img{
+        height:36px;          /* logo size */
+        width:auto;
+        display:block;
+        object-fit:contain;
+        }
+
         .nav-left h2{
             font-size:22px;
             font-weight:700;
@@ -132,11 +146,11 @@
 
         <!-- Logo -->
         <div class="nav-left">
-            <h2>
-    	        <a href="/" style="text-decoration:none; color:inherit;">
-                    📧 Email Automation
+            <h2 class="logo-wrap">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BulkMail Pro Logo">
                 </a>
-	        </h2>
+            </h2>
         </div>
 
         <!-- Center Menu (Always Visible) -->
@@ -182,9 +196,9 @@
         <div class="footer-content">
 
             <div class="footer-left">
-                <h3>📧 MailPilot</h3>
+                <h3>📧 BulkMail Pro</h3>
                 <p>Smart AI Email Automation Platform</p>
-                <p>© 2026 MailPilot. All rights reserved.</p>
+                <p>© 2026 BulkMail Pro. All rights reserved.</p>
             </div>
 
             <div class="footer-center">
