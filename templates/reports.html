@@ -1,34 +1,336 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% block title %}Campaign Analytics{% endblock %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 {% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='reporrts.css') }}">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
+body{
+    background:#f3f6fb;
+    color:#1e293b;
+}
+
+.container{
+    max-width:1300px;
+    margin:auto;
+    padding:28px;
+}
+
+/* ===== Header ===== */
+.page-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.page-head h2{
+    font-size:26px;
+    font-weight:700;
+}
+
+.toolbar{
+    display:flex;
+    gap:12px;
+}
+
+.btn{
+    border:none;
+    padding:10px 14px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.btn-primary{background:#2563eb;color:#fff}
+.btn-light{background:#e2e8f0}
+
+/* ===== Stats ===== */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:16px;
+    margin-bottom:30px;
+}
+
+.stat-box{
+    background:#ffffff;
+    padding:18px;
+    border-radius:10px;
+    border:1px solid #e5eaf2;
+}
+
+.stat-number{
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.stat-label{
+    font-size:13px;
+    color:#64748b;
+}
+
+.blue{color:#2563eb}
+.green{color:#16a34a}
+.red{color:#dc2626}
+.orange{color:#ea580c}
+
+/* ===== Cards ===== */
+.section{margin-top:28px}
+
+.card{
+    background:#ffffff;
+    padding:22px;
+    border-radius:10px;
+    border:1px solid #e5eaf2;
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:18px;
+}
+
+/* ===== Performance Bars ===== */
+.progress-wrap{margin-top:14px}
+
+.progress{
+    height:10px;
+    background:#e2e8f0;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:6px;
+}
+
+.progress-bar{height:100%}
+
+.success{background:#2563eb}
+.failure{background:#dc2626}
+
+/* ===== Grid ===== */
+.grid-2{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:22px;
+}
+
+/* ===== Table ===== */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:12px;text-align:center}
+th{background:#f1f5f9;font-weight:600;color:#334155}
+tr:nth-child(even){background:#f8fafc}
+tr:hover{background:#eef2ff}
+
+.badge{
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.badge-green{background:#dcfce7;color:#166534}
+.badge-orange{background:#ffedd5;color:#9a3412}
+
+/* ===== Top Campaign ===== */
+.top-campaign{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.top-campaign h4{margin-bottom:6px}
+
+/* ===== Footer ===== */
+.footer-note{
+    margin-top:40px;
+    font-size:13px;
+    color:#64748b;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
 <div class="container">
-    <h2>📊 Campaign Reports</h2>
-    <br>
 
+    <!-- Header -->
+    <div class="page-head">
+        <h2>📊 Campaign Analytics & Reports</h2>
+        <div class="toolbar">
+            <button class="btn btn-light">📅 Date Filter</button>
+            <button class="btn btn-light">⬇ Export CSV</button>
+            <button class="btn btn-primary">⬇ Download PDF</button>
+        </div>
+    </div>
+
+    <!-- Stats -->
     <div class="stats">
         <div class="stat-box">
-            <div class="stat-number">{{ total_sent }}</div>
+            <div class="stat-number blue">12,450</div>
             <div class="stat-label">Total Emails Sent</div>
         </div>
-
         <div class="stat-box">
-            <div class="stat-number">{{ campaigns }}</div>
-            <div class="stat-label">Total Campaigns</div>
+            <div class="stat-number green">11,920</div>
+            <div class="stat-label">Delivered</div>
         </div>
-
         <div class="stat-box">
-            <div class="stat-number">{{ failed }}</div>
+            <div class="stat-number red">530</div>
             <div class="stat-label">Failed Emails</div>
         </div>
+        <div class="stat-box">
+            <div class="stat-number blue">46.8%</div>
+            <div class="stat-label">Open Rate</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number orange">13.2%</div>
+            <div class="stat-label">Click Rate</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number red">4.3%</div>
+            <div class="stat-label">Bounce Rate</div>
+        </div>
     </div>
 
-    <br><br>
-
-    <div class="progress-section">
-        <h4>Delivery Performance</h4>
-        <p>Success Rate: <b>{{ ((total_sent-failed)/total_sent*100)|round(1) if total_sent>0 else 0 }}%</b></p>
-        <p>Failure Rate: <b>{{ ((failed)/total_sent*100)|round(1) if total_sent>0 else 0 }}%</b></p>
+    <!-- Performance -->
+    <div class="card">
+        <h3>📦 Delivery Performance</h3>
+        <div class="progress-wrap">
+            <p>Success Rate: <b>95.7%</b></p>
+            <div class="progress"><div class="progress-bar success" style="width:95.7%"></div></div>
+        </div>
+        <div class="progress-wrap">
+            <p>Failure Rate: <b>4.3%</b></p>
+            <div class="progress"><div class="progress-bar failure" style="width:4.3%"></div></div>
+        </div>
     </div>
+
+    <!-- Charts -->
+    <div class="section grid-2">
+        <div class="card">
+            <h3>Emails Sent (Last 7 Days)</h3>
+            <canvas id="lineChart"></canvas>
+        </div>
+        <div class="card">
+            <h3>Open vs Click Comparison</h3>
+            <canvas id="barChart"></canvas>
+        </div>
+        <div class="card">
+            <h3>Success vs Failed Ratio</h3>
+            <canvas id="pieChart"></canvas>
+        </div>
+        <div class="card">
+            <h3>🏆 Top Performing Campaign</h3>
+            <div class="top-campaign">
+                <div>
+                    <h4>Diwali Mega Sale</h4>
+                    <p class="stat-label">Best engagement campaign</p>
+                </div>
+                <div>
+                    <span class="badge badge-green">Open Rate: 62%</span><br><br>
+                    <span class="badge badge-orange">CTR: 21%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="section card">
+        <h3>📋 Campaign Performance Breakdown</h3>
+        <br>
+        <table>
+            <tr>
+                <th>Campaign</th>
+                <th>Sent</th>
+                <th>Opens</th>
+                <th>Clicks</th>
+                <th>Failed</th>
+                <th>Open %</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Diwali Sale</td>
+                <td>4,500</td>
+                <td>2,790</td>
+                <td>940</td>
+                <td>120</td>
+                <td>62%</td>
+                <td><span class="badge badge-green">Excellent</span></td>
+            </tr>
+            <tr>
+                <td>New Product Launch</td>
+                <td>3,200</td>
+                <td>1,120</td>
+                <td>310</td>
+                <td>140</td>
+                <td>35%</td>
+                <td><span class="badge badge-orange">Average</span></td>
+            </tr>
+            <tr>
+                <td>Weekly Newsletter</td>
+                <td>2,900</td>
+                <td>870</td>
+                <td>190</td>
+                <td>160</td>
+                <td>30%</td>
+                <td><span class="badge badge-orange">Average</span></td>
+            </tr>
+            <tr>
+                <td>Festive Offers</td>
+                <td>1,850</td>
+                <td>1,050</td>
+                <td>410</td>
+                <td>110</td>
+                <td>57%</td>
+                <td><span class="badge badge-green">Good</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <p class="footer-note">Analytics view • Detailed campaign performance insights</p>
+
 </div>
+
+<script>
+const lineCtx = document.getElementById('lineChart');
+new Chart(lineCtx, {
+ type: 'line',
+ data: {
+ labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+ datasets: [{
+ data: [1200,1900,1700,2100,2400,1800,2300],
+ tension: 0.4,
+ fill: true
+ }]
+ },
+ options:{plugins:{legend:{display:false}}}
+});
+
+const barCtx = document.getElementById('barChart');
+new Chart(barCtx, {
+ type: 'bar',
+ data: {
+ labels: ['Campaign A','Campaign B','Campaign C','Campaign D'],
+ datasets: [
+ { label: 'Opens', data: [1200,900,1400,1100] },
+ { label: 'Clicks', data: [320,210,410,290] }
+ ]
+ }
+});
+
+const pieCtx = document.getElementById('pieChart');
+new Chart(pieCtx, {
+ type: 'pie',
+ data: {
+ labels: ['Success','Failed'],
+ datasets: [{ data: [11920,530] }]
+ }
+});
+</script>
 
 {% endblock %}

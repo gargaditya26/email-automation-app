@@ -1,132 +1,198 @@
 {% extends 'base.html' %}
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="dashboard">
 
+    <!-- ===== LEFT MAIN ===== -->
     <div class="main">
 
-        <!-- Welcome -->
+        <!-- Welcome + Quick Actions -->
         <div class="card welcome-card">
-            <h2>Welcome back, {{user}} 👋</h2>
-            <p>Here’s your campaign performance overview.</p>
+            <div class="welcome-text">
+                <h2>Welcome back, {{user}} 👋</h2>
+                <p>Here’s what’s happening with your campaigns today.</p>
+                <span class="muted">Last login: Today at 10:42 AM</span>
+            </div>
             <div class="quick-actions">
-                <a class="btn" href="/send">🚀 Create Campaign</a>
-                <a class="btn btn-outline" href="/reports">📊 View Reports</a>
+                <a class="btn primary" href="/send">🚀 Create Campaign</a>
+                <a class="btn outline" href="/reports">📊 View Reports</a>
+                <a class="btn outline" href="/contacts">👥 Contacts</a>
             </div>
         </div>
 
-        <!-- Stats Row -->
+        <!-- Stats Overview -->
         <div class="stats">
             <div class="card stat-box">
-                <div class="stat-number counter" data-target="{{ total_sent }}">0</div>
-                <div class="stat-label">Emails Sent</div>
+                <div class="icon">📧</div>
+                <div>
+                    <div class="stat-number counter" data-target="{{ total_sent }}">0</div>
+                    <div class="stat-label">Emails Sent</div>
+                </div>
             </div>
+
             <div class="card stat-box">
-                <div class="stat-number counter" data-target="{{ campaigns }}">0</div>
-                <div class="stat-label">Campaigns</div>
+                <div class="icon">✅</div>
+                <div>
+                    <div class="stat-number">11,920</div>
+                    <div class="stat-label">Delivered</div>
+                </div>
             </div>
+
             <div class="card stat-box">
-                <div class="stat-number counter" data-target="{{ failed }}">0</div>
-                <div class="stat-label">Failed Deliveries</div>
+                <div class="icon">❌</div>
+                <div>
+                    <div class="stat-number counter" data-target="{{ failed }}">0</div>
+                    <div class="stat-label">Failed</div>
+                </div>
+            </div>
+
+            <div class="card stat-box">
+                <div class="icon">📬</div>
+                <div>
+                    <div class="stat-number">46.8%</div>
+                    <div class="stat-label">Open Rate</div>
+                </div>
+            </div>
+
+            <div class="card stat-box">
+                <div class="icon">🖱</div>
+                <div>
+                    <div class="stat-number">13.2%</div>
+                    <div class="stat-label">Click Rate</div>
+                </div>
+            </div>
+
+            <div class="card stat-box">
+                <div class="icon">🔥</div>
+                <div>
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Active Campaigns</div>
+                </div>
             </div>
         </div>
 
-        <!-- AI + Activity Grid -->
+        <!-- Today's Performance -->
+        <div class="card today-strip">
+            <h3>⚡ Today's Performance</h3>
+            <div class="today-grid">
+                <div><b>1,240</b><span>Emails Sent</span></div>
+                <div><b>842</b><span>Opens</span></div>
+                <div><b>231</b><span>Clicks</span></div>
+                <div><b>37</b><span>Failures</span></div>
+            </div>
+        </div>
+
+        <!-- Performance Chart -->
+        <div class="card">
+            <div class="section-head">
+                <h3>📈 Email Performance</h3>
+                <span class="muted">Last 7 days</span>
+            </div>
+            <canvas id="miniChart" height="90"></canvas>
+        </div>
+
+        <!-- AI + Activity -->
         <div class="dual-grid">
             <div class="card ai-card">
                 <h3>🧠 AI Insights</h3>
                 <ul>
-                    <li>📈 Best open rate at <b>7 PM</b></li>
-                    <li>🔥 Emoji subject lines perform 23% better</li>
-                    <li>🚀 Engagement increased this week</li>
+                    <li class="good">🟢 Open rates improved by 12% this week</li>
+                    <li class="warn">🟡 Try sending campaigns after 7 PM for better engagement</li>
+                    <li class="alert">🔴 Bounce rate slightly higher than usual</li>
                 </ul>
             </div>
 
             <div class="card">
                 <h3>📜 Recent Activity</h3>
                 <ul class="activity-list">
-                    <li>✅ Campaign <b>Festival Offer</b> sent</li>
-                    <li>📬 {{ total_sent }} emails delivered</li>
-                    <li>❌ {{ failed }} emails failed</li>
-                    <li>👥 Contact list updated</li>
+                    <li><span>2 min ago</span> ✅ Campaign <b>Festival Offer</b> sent</li>
+                    <li><span>1 hr ago</span> 👥 Contact list updated</li>
+                    <li><span>3 hrs ago</span> 📬 {{ total_sent }} emails delivered</li>
+                    <li><span>Yesterday</span> 🎉 25 new subscribers joined</li>
                 </ul>
             </div>
         </div>
 
-        <!-- Campaign Table -->
+        <!-- Recent Campaigns -->
         <div class="card">
             <div class="section-head">
                 <h3>📬 Recent Campaigns</h3>
-                <a href="/campaigns" class="link">View All</a>
+                <a href="/campaigns" class="btn small outline">View All</a>
             </div>
             <table class="campaign-table">
                 <tr>
                     <th>Campaign</th>
                     <th>Date</th>
+                    <th>Open Rate</th>
                     <th>Status</th>
                 </tr>
                 <tr>
                     <td>Festive Sale</td>
                     <td>12 Mar</td>
-                    <td class="status sent">✅ Sent</td>
+                    <td>62%</td>
+                    <td><span class="badge success">Sent</span></td>
                 </tr>
                 <tr>
                     <td>Product Launch</td>
                     <td>10 Mar</td>
-                    <td class="status scheduled">⏳ Scheduled</td>
+                    <td>41%</td>
+                    <td><span class="badge warning">Scheduled</span></td>
                 </tr>
                 <tr>
                     <td>Weekly Newsletter</td>
                     <td>8 Mar</td>
-                    <td class="status active">🟢 Active</td>
+                    <td>38%</td>
+                    <td><span class="badge info">Active</span></td>
                 </tr>
             </table>
         </div>
 
     </div>
 
-    <!-- Right Panel -->
+    <!-- ===== RIGHT PANEL ===== -->
     <div class="right-panel">
 
-        <!-- Usage -->
-        <div class="card progress-section">
-            <h4>📈 Monthly Usage</h4>
-            <div class="progress-bar">
-                <div class="progress-fill 
-                    {% if used <= 150 %} safe
-                    {% elif used <= 250 %} alert
-                    {% else %} danger
-                    {% endif %}
-                " style="width: {{ (used/500)*100 }}%;"></div>
-            </div>
-            <p><strong>{{used}}</strong> of 500 emails used</p>
-        </div>
-
-        <!-- Contacts -->
-        <div class="card contacts-card">
-            <h3>👥 Contacts Overview</h3>
-            <div class="mini-stats">
-                <div><span>All Contacts</span><b>1,240</b></div>
-                <div><span>Active</span><b>1,180</b></div>
-                <div><span>Unsubscribed</span><b>60</b></div>
-            </div>
-        </div>
-
-        <!-- Engagement -->
         <div class="card engagement-card">
             <h3>🎯 Engagement Score</h3>
             <div class="score-circle">82%</div>
             <p>Above industry average 🚀</p>
         </div>
 
-        <!-- Notifications -->
-        <div class="card notify-card">
-            <h3>🔔 Notifications</h3>
+        <div class="card progress-section">
+            <h4>📈 Monthly Usage</h4>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ (used/3000)*100 }}%;"></div>
+            </div>
+            <p><strong>{{used}}</strong> of 3000 emails used</p>
+        </div>
+
+        <div class="card contacts-card">
+            <h3>👥 Contacts Overview</h3>
+            <div class="mini-stats">
+                <div><span>All</span><b>1,240</b></div>
+                <div><span>Active</span><b>1,180</b></div>
+                <div><span>Unsubscribed</span><b>60</b></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🏆 Top Campaign</h3>
+            <p><b>Festive Sale</b></p>
             <ul>
-                <li>📢 Campaign completed successfully</li>
-                <li>⚠ Some emails bounced</li>
-                <li>🎉 25 new subscribers joined</li>
+                <ul> 🟢 Open Rate: 62%</ul>
+                <ul> 🟢 CTR: 21%</ul>
+            </ul>
+        </div>
+
+        <div class="card system-card">
+            <h3>🛠 System Health</h3>
+            <ul>
+                <li>🟢 Email Server: Working</li>
+                <li>🟢 SMTP: Connected</li>
+                <li>🟡 Bounce Rate: Moderate</li>
+                <li>🔴 Domain Auth: Pending</li>
             </ul>
         </div>
 
@@ -134,6 +200,7 @@
 </div>
 
 <script>
+// Counter Animation
 const counters = document.querySelectorAll('.counter');
 counters.forEach(counter => {
     const updateCount = () => {
@@ -146,6 +213,32 @@ counters.forEach(counter => {
         } else { counter.innerText = target; }
     };
     updateCount();
+});
+
+// Mini Chart
+const ctx = document.getElementById('miniChart');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [
+        {
+            label: 'Sent',
+            data: [120,190,170,210,240,180,230],
+            tension: 0.4,
+            fill: true
+        },
+        {
+            label: 'Opens',
+            data: [80,140,120,160,190,150,170],
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: { y: { display: false } }
+    }
 });
 </script>
 

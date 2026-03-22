@@ -199,10 +199,10 @@ section{padding:25px 0;position:relative}
 .trust{background:#fff}
 
 .trust-stats{
-  margin-top:50px;
+  margin-top:20px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:30px;
+  gap:20px;
   text-align:center;
 }
 
@@ -213,6 +213,31 @@ section{padding:25px 0;position:relative}
 }
 
 .trust-stats p{color:var(--text-light)}
+
+/* Trust Stat Cards */
+.trust-stats > div{
+  background:#ffffff;
+  padding:10px 8px;
+  border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
+  border:1px solid var(--border);
+  transition:all .25s ease;
+}
+
+.trust-stats > div:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(37,99,235,0.15);
+  border-color:#dbeafe;
+}
+
+.trust-stats h3{
+  font-size:38px;
+  font-weight:700;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
 
 /* ===== PROBLEM / SOLUTION ===== */
 .problem-wrap{
@@ -499,7 +524,6 @@ section{padding:25px 0;position:relative}
 
 /* ===== FAQ ===== */
 .faq{max-width:820px;margin:50px auto 0}
-
 .faq-item{
   background:#fff;
   padding:22px;
