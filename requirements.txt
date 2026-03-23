@@ -1,5 +1,5 @@
-Flask
+flask
 pandas
+firebase-admin
 openpyxl
 gunicorn
-firebase-admin
