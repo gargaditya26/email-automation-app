@@ -18,10 +18,16 @@ app.secret_key = "super_secret_key_123"
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = "filesystem"
 
-cred = credentials.Certificate("firebase-adminsdk.json")
+import json
+from firebase_admin import credentials
+
+if os.environ.get("FIREBASE_KEY"):
+    firebase_key = json.loads(os.environ.get("FIREBASE_KEY"))
+    cred = credentials.Certificate(firebase_key)
+else:
+    cred = credentials.Certificate("firebase-adminsdk.json")
+
 firebase_admin.initialize_app(cred)
-
-
 UPLOAD_FOLDER = "uploads"
 USER_DATA = "user_data"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
