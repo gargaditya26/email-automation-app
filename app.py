@@ -21,13 +21,11 @@ app.config['SESSION_TYPE'] = "filesystem"
 import json
 from firebase_admin import credentials
 
-if os.environ.get("FIREBASE_KEY"):
-    firebase_key = json.loads(os.environ.get("FIREBASE_KEY"))
-    cred = credentials.Certificate(firebase_key)
-else:
-    cred = credentials.Certificate("firebase-adminsdk.json")
-
+firebase_key = json.loads(os.environ["FIREBASE_KEY"])
+cred = credentials.Certificate(firebase_key)
 firebase_admin.initialize_app(cred)
+
+
 UPLOAD_FOLDER = "uploads"
 USER_DATA = "user_data"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
