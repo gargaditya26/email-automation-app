@@ -2,15 +2,24 @@ import os
 import smtplib
 import pandas as pd
 import csv
+import firebase_admin
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 
-app = Flask(__name__)
-app.secret_key = "secretkey"
 
+from firebase_admin import credentials, auth
+from flask import Flask, request, session, jsonify
+
+app = Flask(__name__)
+app.secret_key = "super_secret_key_123"
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_TYPE'] = "filesystem"
+
+cred = credentials.Certificate("firebase-adminsdk.json")
+firebase_admin.initialize_app(cred)
 
 
 UPLOAD_FOLDER = "uploads"
@@ -44,47 +53,19 @@ def send_email_smtp(sender, password, receiver, subject, body, attachment_path=N
 
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup')
 def signup():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        user_folder = os.path.join(USER_DATA, username)
-        os.makedirs(user_folder, exist_ok=True)
-        with open(os.path.join(user_folder, 'profile.txt'), 'w') as f:
-            f.write(password)
-        flash('Account created!')
-        return redirect(url_for('login'))
     return render_template('signup.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        try:
-            with open(os.path.join(USER_DATA, username, 'profile.txt')) as f:
-                if f.read() == password:
-                    session['user'] = username
-                    return redirect(url_for('dashboard'))
-        except:
-            pass
-        flash('Invalid credentials')
-    return render_template('login.html')
 
-
-@app.route('/logout')
-def logout():
-    session.pop('user', None)
-    return redirect(url_for('login'))
 
 
 # ✅ UPDATED DASHBOARD — REAL STATS
 @app.route('/dashboard')
 def dashboard():
     if 'user' not in session:
-        return redirect(url_for('login'))
+        return redirect('/login')
 
     stats_file = os.path.join(USER_DATA, session['user'], 'stats.csv')
 
@@ -175,6 +156,10 @@ def features():
 def pricing():
     return render_template('pricing.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 @app.route("/reports")
 def reports():
     if 'user' not in session:
@@ -196,7 +181,21 @@ def reports():
 def about():
     return render_template("about.html")
 
+@app.route('/verify-token', methods=['POST'])
+def verify_token():
+    token = request.json.get('token')
+    try:
+        decoded_token = auth.verify_id_token(token)
+        session['user'] = decoded_token['uid']
+        return jsonify({'status': 'success'})
+    except Exception as e:
+        print("Token Error:", e)
+        return jsonify({'status': 'error'})
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
 
 if __name__ == '__main__':
     app.run(debug=True)

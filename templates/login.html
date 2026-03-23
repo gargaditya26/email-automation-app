@@ -6,10 +6,17 @@
 <div class="auth-container">
   <div class="auth-box">
     <h3>Welcome Back 👋</h3>
-    <form method="POST">
-        <input name="username" placeholder="Username" required>
-        <input name="password" type="password" placeholder="Password" required>
-        <button>Login to Dashboard</button>
+
+    <form id="loginForm">
+        
+        <input id="email" type="email" placeholder="Enter Email" required>
+
+        <div class="input-group">
+            <input id="password" type="password" placeholder="Password" required>
+            <span class="toggle-pass" id="togglePass">Show</span>
+        </div>
+
+        <button type="submit" id="loginBtn">Login to Dashboard</button>
     </form>
 
     <div class="auth-divider">OR</div>
@@ -17,5 +24,8 @@
     <p>No account? <a href="/signup">Create one</a></p>
   </div>
 </div>
+
+<!-- Firebase JS -->
+<script type="module" src="{{ url_for('static', filename='login.js') }}"></script>
 
 {% endblock %}
