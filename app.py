@@ -21,10 +21,12 @@ app.config['SESSION_TYPE'] = "filesystem"
 import json
 from firebase_admin import credentials
 
-firebase_key = json.loads(os.environ["FIREBASE_KEY"])
-cred = credentials.Certificate(firebase_key)
-firebase_admin.initialize_app(cred)
-
+# ✅ Render pe ENV use karo, local pe file
+if "RENDER" in os.environ:
+    firebase_key = json.loads(os.environ["FIREBASE_KEY"])
+    cred = credentials.Certificate(firebase_key)
+else:
+    cred = credentials.Certificate("firebase-adminsdk.json")
 
 UPLOAD_FOLDER = "uploads"
 USER_DATA = "user_data"
