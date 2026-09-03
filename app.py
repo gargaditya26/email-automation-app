@@ -28,6 +28,10 @@ if "RENDER" in os.environ:
 else:
     cred = credentials.Certificate("firebase-adminsdk.json")
 
+# Initialize Firebase Admin SDK before using auth.verify_id_token()
+if not firebase_admin._apps:
+    firebase_admin.initialize_app(cred)
+
 UPLOAD_FOLDER = "uploads"
 USER_DATA = "user_data"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
